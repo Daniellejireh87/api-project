@@ -7,7 +7,7 @@ import GraphQLMovies from './components/GraphQLMovies';
 
 function LoginButton() {
   return (
-    <a href="http://localhost:3000/auth/google">
+    <a href="http://localhost:4000/auth/google">
       <button>Se connecter avec Google</button>
     </a>
   );
@@ -24,7 +24,7 @@ export default function App() {
   const [liked, setLiked] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/profile", { credentials: "include" })
+    fetch("http://localhost:4000/profile", { credentials: "include" })
       .then(res => {
         if (!res.ok) throw new Error("Non authentifié");
         return res.json();
@@ -35,7 +35,7 @@ export default function App() {
 
   useEffect(() => {
     if (!user) return;
-    fetch("http://localhost:3000/token", { credentials: "include" })
+    fetch("http://localhost:4000/token", { credentials: "include" })
       .then(res => {
         if (!res.ok) throw new Error("Non authentifié");
         return res.json();
@@ -46,7 +46,7 @@ export default function App() {
 
   const fetchRecommendations = () => {
     setLoading(true);
-    fetch("http://localhost:3000/recommendations", {
+    fetch("http://localhost:5000/recommendations", {
       headers: { Authorization: `Bearer ${jwtToken}` }
     })
       .then(res => {
@@ -118,7 +118,7 @@ export default function App() {
   });
 
   const handleLogout = () => {
-    fetch("http://localhost:3000/logout", { credentials: "include" })
+    fetch("http://localhost:4000/logout", { credentials: "include" })
       .then(() => {
         setUser(null);
         setJwtToken(null);
@@ -179,9 +179,7 @@ export default function App() {
       <ul>{liked.map((m,i)=><li key={i}>{m.title}</li>)}</ul>
       <hr />
       <ExternalMovies />
-      <hr />
-      <SecurePing />
-      <hr />
+      
       <GraphQLMovies />
     </div>
   );

@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
+console.log("▶️ [Auth-Service] GOOGLE_CLIENT_ID =", process.env.GOOGLE_CLIENT_ID);
 
 const app = express();
 
